@@ -1,5 +1,9 @@
 language: generic
 
+group: edge
+
+dist: trusty
+
 env:
   global:
   - PATH="/opt/chefdk/bin:/opt/chefdk/embedded/bin:/opt/chef/bin:$PATH"
@@ -16,3 +20,5 @@ script:
 - git diff --exit-code
 - git diff --cached --exit-code
 - ./runtests
+- TMPL=$(git log -1 | awk '/^BUILD packer-template/ { print $NF }')
+- if [[ $TMPL ]] ; then packer build -only=docker ${TMPL} ; fi
