@@ -20,6 +20,5 @@ script:
 - git diff --exit-code
 - git diff --cached --exit-code
 - ./runtests
-- git log -1 | awk '/^BUILD packer-template/ { print $NF }'
-- TMPL=$(git log -1 | awk '/^BUILD packer-template/ { print $NF }')
+- TMPL=$(git log -1 | awk '/BUILD packer-template.*json/ { print $NF }')
 - if [[ $TMPL ]] ; then packer build -only=docker ${TMPL} ; fi
