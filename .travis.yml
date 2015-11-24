@@ -1,6 +1,6 @@
 language: generic
 
-group: edge
+group: dev
 
 dist: trusty
 
